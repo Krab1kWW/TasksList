@@ -3,127 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Консольный менеджер задач</title>
+    <title>Менеджер задач</title>
 </head>
 
-<body>
-    <h1>123</h1>
+<body> 
+    <div id="stats">Всего: 0 | Выполнено: 0 | Активных: 0</div>
+
+    <input type="text" id="taskInput" placeholder="Введите задачу...">
+
+    <button id="addButton">Добавить</button>
+
+
+    <div id="filters">
+        <button data-filter="all">Все</button>
+        <button data-filter="active">Активные</button>
+        <button data-filter="completed">Выполненные</button>
+    </div>
+
+    <ul id="taskList"></ul>
+    <button id="clearCompleted">Очистить выполненные</button>
+    </div>
+
+
+
+
+
     <script>
-            var tasks = [];
-            var completed = [];
-            let number_task = 1;
-            console.log("Добро пожаловать в менеджер задач!")
-            let status = true
-
-            while (status) {
-
-                console.log("1 – Добавить задачу \n2 – Показать все задачи \n3 – Отметить задачу как выполненную \n4 – Удалить задачу \n5 – Показать только выполненные  \n6 – Показать только активные (невыполненные) \n0 – Выход ");
-                let comand = prompt("Введите номер команды:");
-
-
-                if (comand == 1) {                 
-                    console.log("Выбрана команда 1");
-                    let task = prompt("Введите текст задачи:")
-                    if (task == null || task.trim() === "") {
-                        alert("Задача не может быть пустой")
-                    }
-                    else {
-                        tasks.push(task)
-                        completed.push(false)
-                        console.log("Задача добавлена")
-                    }
-
-                }
-
-                else if (comand == 2) {
-                    let number_task = 1;
-                    for (let i = 0; i < tasks.length; i++) {
-
-                        let task = tasks[i]
-                        let sumbol = completed[i] == true ? 'x' : ' ';
-                        const text = ` ${number_task}. [${sumbol}] ${task} `;
-                        console.log(text);
-                        number_task++;
-                    }
-
-                }
-                else if (comand == 3) {
-                    let number = prompt("Введите номер задачи:")
-                    let num = parseInt(number)
-                    let index = num - 1
-                    if (isNaN(num)) {
-                        alert("Введите число!")
-                    }
-                    else if (index < 0 || index >= tasks.length) {
-                        alert("Задачи с таким номером нет!")
-
-                    }
-                    else if (completed[index] == true) {
-                        alert("Задача уже выполнена!")
-                        console.log("Задача уже выполнена!")
-                    }
-
-                    else if (completed[index] == false) {
-                        completed[index] = true
-                        alert("Задача выполнена!")
-                        console.log("Выполнена!")
-                    }
-                }
-
-
-                else if (comand == 4) {
-                    let number = prompt("Введите номер задачи:")
-                    let num = parseInt(number)
-                    let index = num - 1
-                    if (isNaN(num)) {
-                        alert("Введите число!")
-                    }
-                    else if (index < 0 || index >= tasks.length) {
-                        alert("Задачи с таким номером нет!")
-
-                    }
-                    else {
-                        completed.splice(index, 1)
-                        tasks.splice(index, 1)
-                    }
-
-
-                }
-                else if (comand == 5) {
-                    let number_task = 1;
-                    for (let i = 0; i < completed.length; i++) {
-                        if (completed[i] == true) {
-                            let task = tasks[i]
-                            let sumbol = completed[i] == true ? 'x' : ' ';
-                            const text = ` ${number_task}. [${sumbol}] ${task} `;
-                            console.log(text);
-                        }
-
-                    }
-
-                }
-
-                else if (comand == 6) {
-                    let number_task = 1;
-                    for (let i = 0; i < completed.length; i++) {
-                        if (completed[i] == false) {
-                            let task = tasks[i]
-                            let sumbol = completed[i] == true ? 'x' : ' ';
-                            const text = ` ${number_task}. [${sumbol}] ${task} `;
-                            console.log(text);
-                        }
-
-                    }
-
-                }
-
-                else if (comand == 0) {
-                    console.log("До свидания!");
-                    status = false;
-                    break;
-                }
-            }
-        
     </script>
 </body>
 
