@@ -53,9 +53,36 @@ function addTask()
 function renderTasks()
 {
     taskList.innerHTML = '';  // Очистить список
+    let filteredTasks = [];
+    if (currentFilter == "all")
+    {
+        filteredTasks = tasks;
+    }
 
+    else if (currentFilter == 'active')
+    {
+        filteredTasks = tasks.filter(t => !t.completed)
+    }
+
+    else if (currentFilter == 'completed')
+    {
+        filteredTasks = tasks.filter(t => t.completed)
+    }
+
+
+    for (let i = 0; i < filteredTasks.length; i++)
+        {
+            const li = document.createElement('li');
+            li.className = 'task-item';
+            li.innerHTML = `
+            <input type="checkbox" ${task.completed ? 'checked' : ''}>
+            <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
+            <button class="btn-delete">Удалить</button>
+             `;
+
+        }
     
-
+    updateStats()    
 
 }
 
