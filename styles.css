@@ -2,9 +2,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    
     
 }
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+   
+}
+
 
 .task-item {
     display: flex;
@@ -35,103 +45,6 @@
 }
 
 
-
-
-
-
-/* Добавить */
-.animated-button {
-    margin-left: 10px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 16px 36px;
-    border: 4px solid;
-    border-color: transparent;
-    font-size: 16px;
-    background-color: inherit;
-    border-radius: 12px;
-    font-weight: 600;
-    color: greenyellow;
-    box-shadow: 0 0 0 2px greenyellow;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animated-button svg {
-    position: absolute;
-    width: 24px;
-    fill: greenyellow;
-    z-index: 9;
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animated-button .arr-1 {
-    right: 16px;
-}
-
-.animated-button .arr-2 {
-    left: -25%;
-}
-
-.animated-button .circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background-color: greenyellow;
-    border-radius: 50%;
-    opacity: 0;
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animated-button .text {
-    position: relative;
-    z-index: 1;
-    transform: translateX(-12px);
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.animated-button:hover {
-    box-shadow: 0 0 0 12px transparent;
-    color: #212121;
-    border-radius: 12px;
-}
-
-.animated-button:hover .arr-1 {
-    right: -25%;
-}
-
-.animated-button:hover .arr-2 {
-    left: 16px;
-}
-
-.animated-button:hover .text {
-    transform: translateX(12px);
-}
-
-.animated-button:hover svg {
-    fill: #212121;
-}
-
-.animated-button:active {
-    scale: 0.95;
-    box-shadow: 0 0 0 4px greenyellow;
-}
-
-.animated-button:hover .circle {
-    width: 220px;
-    height: 220px;
-    opacity: 1;
-}
-/* ----------------- */
-
-
-
 /* Поле ввода */
 .input {
     width: 100%;
@@ -157,5 +70,183 @@
 
 .input:focus {
     border: 2px solid greenyellow;
+}
+
+/* ----------------- */
+
+
+
+/* Добавить */
+.add-button {
+    margin-left: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px 36px;
+    border: 4px solid;
+    border-color: transparent;
+    font-size: 16px;
+    background-color: inherit;
+    border-radius: 12px;
+    font-weight: 600;
+    color: greenyellow;
+    box-shadow: 0 0 0 2px greenyellow;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+
+    flex-shrink: 0;
+    width: auto; 
+    min-width: 140px;
+    height: 56px;
+}
+
+.add-button svg {
+    position: absolute;
+    width: 24px;
+    fill: greenyellow;
+    z-index: 9;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.add-button .arr-1 {
+    right: 16px;
+}
+
+.add-button .arr-2 {
+    left: -25%;
+}
+
+.add-button .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: greenyellow;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.add-button .text {
+    position: relative;
+    z-index: 1;
+    transform: translateX(-12px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.add-button:hover {
+    box-shadow: 0 0 0 12px transparent;
+    color: #212121;
+    border-radius: 12px;
+}
+
+.add-button:hover .arr-1 {
+    right: -25%;
+}
+
+.add-button:hover .arr-2 {
+    left: 16px;
+}
+
+.add-button:hover .text {
+    transform: translateX(12px);
+}
+
+.add-button:hover svg {
+    fill: #212121;
+}
+
+.add-button:active {
+    scale: 0.95;
+    box-shadow: 0 0 0 4px greenyellow;
+}
+
+.add-button:hover .circle {
+    width: 220px;
+    height: 220px;
+    opacity: 1;
+}
+/* ----------------- */
+
+
+
+
+
+
+
+/* --- Элемент списка --- */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+    margin-bottom: 8px;
+    margin: 15px;
+
+    width: 320px;
+    height: 60px;
+}
+
+.task-item:hover {
+    background: #fafafa;
+    border-color: #e0e0e0;
+}
+
+
+.task-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+
+.task-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #4ade80;
+    flex-shrink: 0;
+}
+
+
+.task-text {
+    font-size: 1rem;
+    color: #1e293b;
+    transition: all 0.2s;
+    word-break: break-word;
+}
+
+
+.task-text.completed {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
+
+
+.btn-delete {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-delete:hover {
+    background: #fee2e2;
+    color: #ef4444;
 }
 /* ----------------- */
