@@ -43,8 +43,8 @@ function addTask()
             alert("Задача добавлена")
 
             taskInput.value = ''
-            renderTasks()
-            updateStats()
+            renderTasks();
+            updateStats();
         }
     
 }
@@ -75,16 +75,77 @@ function renderTasks()
             const li = document.createElement('li');
             li.className = 'task-item';
             li.innerHTML = `
-            <input type="checkbox" ${task.completed ? 'checked' : ''}>
-            <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
-            <button class="btn-delete">Удалить</button>
+            <input type="checkbox" data-id="${filteredTasks[i].id}"  ${filteredTasks[i].completed ? 'checked' : ''}>
+            <span class="task-text ${filteredTasks[i].completed ? 'completed' : ''}">${filteredTasks[i].text}</span>
+            <button class="btn-delete" data-id="${filteredTasks[i].id}">Удалить</button>
              `;
-
+            taskList.appendChild(li);
         }
     
-    updateStats()    
+    updateStats();    
 
 }
+
+
+function updateStats()
+{
+    let allTasks = tasks.length;
+    let completedTasks = tasks.filter(t => t.completed).length;
+    let activeTasks = tasks.filter(t => !t.completed).length;
+
+    stats.textContent = `Всего: ${allTasks} | Выполнено: ${completedTasks} | Активных: ${activeTasks}`
+    
+
+}
+
+
+function toggleTask(id)
+{
+    for (let i = 0; i < tasks.length; i++)
+    {
+        if(tasks[i].id === id)
+        {
+            tasks[i].completed = !tasks[i].completed;
+            break;
+        }
+    }
+    renderTasks();
+    updateStats();
+  
+}
+function deleteTask(id)
+{
+    for (let i = 0; i < tasks.length; i++)
+    {
+        if(tasks[i].id === id)
+        {
+            tasks.splice(i, 1)
+            break;
+        }
+    }
+    renderTasks();
+    updateStats();
+}
+
+
+
+taskList.addEventListener('click', function(e){
+    if(e.target.matches('.task-checkbox'))
+    {
+        let id = Number(e.target.dataset.id)
+        toggleTask(id)
+    }
+
+    if (e.target.matches('.btn-delete'))
+    {
+        let id = Number(e.target.dataset.id)
+        deleteTask(id)
+    }
+});
+
+
+
+
 
 addButton.addEventListener('click', addTask);
 taskInput.addEventListener('keypress', (e) =>
