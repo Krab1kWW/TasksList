@@ -75,7 +75,7 @@ function renderTasks()
             const li = document.createElement('li');
             li.className = 'task-item';
             li.innerHTML = `
-            <input type="checkbox" data-id="${filteredTasks[i].id}"  ${filteredTasks[i].completed ? 'checked' : ''}>
+            <input type="checkbox" class="task-checkbox" data-id="${filteredTasks[i].id}" ${filteredTasks[i].completed ? 'checked' : ''}>
             <span class="task-text ${filteredTasks[i].completed ? 'completed' : ''}">${filteredTasks[i].text}</span>
             <button class="btn-delete" data-id="${filteredTasks[i].id}">Удалить</button>
              `;
@@ -129,6 +129,10 @@ function deleteTask(id)
 
 
 
+
+
+
+//Удаление и отметка задачи как "Выполненная"
 taskList.addEventListener('click', function(e){
     if(e.target.matches('.task-checkbox'))
     {
@@ -143,12 +147,22 @@ taskList.addEventListener('click', function(e){
     }
 });
 
-
-
-
-
+//Добавление задачи
 addButton.addEventListener('click', addTask);
+
 taskInput.addEventListener('keypress', (e) =>
     {
          if (e.key === 'Enter') addTask();  
     });
+
+
+clearCompletedBtn.addEventListener('click', function(e){
+
+    tasks = tasks.filter(function(task)
+    {
+        return task.completed === false;
+    })  
+    renderTasks();
+    updateStats();    
+
+    });    
