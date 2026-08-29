@@ -18,6 +18,9 @@ const  stats = document.getElementById('stats')
 // контейнер с кнопками
 const filters = document.getElementById('filters')
 
+// кнопки фильтров
+const filterButtons = document.querySelectorAll('#filters button');
+
 // кнопка "Очистить выполненные задачи"
 const clearCompletedBtn = document.getElementById('clearCompleted')
 
@@ -27,7 +30,7 @@ function addTask()
     let text = taskInput.value;
     if (text.trim() === "")
             {
-                alert("Введите текст.")
+                showNotification("Введите текст задачи!", "error");
             }
 
      else
@@ -40,7 +43,7 @@ function addTask()
 
             tasks.push(newTask)
             nextId++
-            alert("Задача добавлена")
+            showNotification("Задача добавлена!", "success");
 
             taskInput.value = ''
             renderTasks();
@@ -120,15 +123,63 @@ function deleteTask(id)
         if(tasks[i].id === id)
         {
             tasks.splice(i, 1)
+            showNotification("Задача удалена!", "success")
             break;
         }
     }
+    showNotification("Задача удалена!", "success")
     renderTasks();
     updateStats();
 }
 
 
+function showNotification(message, type = 'success') {
+    const container = document.getElementById('notification-container');
+    if (!container) return;
 
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+
+    // Заголовок в зависимости от типа
+    let title = 'Успешно!';
+    if (type === 'error') title = 'Ошибка!';
+    else if (type === 'info') title = 'Информация';
+
+    notification.innerHTML = `
+        <div class="notification-bar">
+            <svg width="16" height="100%" viewBox="0 0 16 96" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 8 0 Q 4 4.8, 8 9.6 T 8 19.2 Q 4 24, 8 28.8 T 8 38.4 Q 4 43.2, 8 48 T 8 57.6 Q 4 62.4, 8 67.2 T 8 76.8 Q 4 81.6, 8 86.4 T 8 96 L 0 96 L 0 0 Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="notification-body">
+            <p class="notification-title">${title}</p>
+            <p class="notification-message">${message}</p>
+        </div>
+        <button class="notification-close">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </button>
+    `;
+
+    container.appendChild(notification);
+
+    // Кнопка закрытия
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.addEventListener('click', function() {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 400);
+    });
+
+    // Анимация появления
+    setTimeout(() => notification.classList.add('show'), 10);
+
+    // Автоудаление через 3 секунды
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 400);
+    }, 3000);
+}
 
 
 
@@ -137,13 +188,17 @@ taskList.addEventListener('click', function(e){
     if(e.target.matches('.task-checkbox'))
     {
         let id = Number(e.target.dataset.id)
+        showNotification("Задача выполнена!", "success");
         toggleTask(id)
+        
+        
     }
 
     if (e.target.matches('.btn-delete'))
     {
         let id = Number(e.target.dataset.id)
         deleteTask(id)
+        
     }
 });
 
@@ -155,14 +210,33 @@ taskInput.addEventListener('keypress', (e) =>
          if (e.key === 'Enter') addTask();  
     });
 
-
+//Кнопка очистки
 clearCompletedBtn.addEventListener('click', function(e){
 
     tasks = tasks.filter(function(task)
     {
         return task.completed === false;
     })  
+    showNotification("Выполненные задачи очищены!", "info");
     renderTasks();
     updateStats();    
-
+    
     });    
+
+
+//Фильтры
+filterButtons.forEach(function(button)
+{
+    button.addEventListener('click', function(e) {
+        currentFilter = e.currentTarget.dataset.filter
+
+        filterButtons.forEach(function(btn){
+            btn.classList.remove('active')
+        });
+        
+        this.classList.add('active')
+
+        showNotification("Фильтр применён", "info");
+        renderTasks();
+    });
+});
