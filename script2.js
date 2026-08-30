@@ -98,6 +98,9 @@ function updateStats()
 
     stats.textContent = `Всего: ${allTasks} | Выполнено: ${completedTasks} | Активных: ${activeTasks}`
     
+    document.querySelector('[data-filter="all"] .count').textContent = tasks.length;
+    document.querySelector('[data-filter="active"] .count').textContent = tasks.filter(t => !t.completed).length;
+    document.querySelector('[data-filter="completed"] .count').textContent = tasks.filter(t => t.completed).length;
 
 }
 
@@ -293,7 +296,7 @@ filterButtons.forEach(function(button)
         
         this.classList.add('active')
 
-        showNotification("Фильтр применён", "info");
+        // showNotification("Фильтр применён", "info");
         renderTasks();
     });
 });

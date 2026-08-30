@@ -5,6 +5,73 @@
     
     
 }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+/* ===== Глобальные настройки шрифтов ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #1e293b;
+    background: #f8fafc;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ===== Заголовки ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+/* ===== Текст задач ===== */
+.task-text {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0f172a;
+}
+
+/* ===== Поле ввода ===== */
+.input {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+/* ===== Кнопки ===== */
+button {
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+/* ===== Статистика ===== */
+#stats {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* ===== Уведомления ===== */
+.notification-title {
+    font-weight: 700;
+}
+
+.notification-message {
+    font-weight: 400;
+}
 
 body {
     display: flex;
@@ -407,5 +474,95 @@ body {
 #filters button.active .count {
     background: #e2e8f0;
     color: #0f172a;
+}
+/* ----------------- */
+
+
+
+
+
+
+/* ===== Кнопка "Очистить выполненные" ===== */
+#clearCompleted {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    margin-top: 16px;
+    width: 100%;
+    max-width: 200px;
+    border: none;
+    border-radius: 10px;
+    background: #fef2f2;
+    color: #dc2626;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(220, 38, 38, 0.1);
+}
+
+
+
+/* Ховер */
+#clearCompleted:hover {
+    background: #fee2e2;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Активное нажатие */
+#clearCompleted:active {
+    transform: scale(0.96);
+    box-shadow: 0 1px 3px rgba(220, 38, 38, 0.1);
+}
+
+
+
+/* Можно добавить, чтобы текст был в одну строку */
+#clearCompleted {
+    white-space: nowrap;
+}
+/* ----------------- */
+
+
+
+
+#stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #1e293b;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+#stats span {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+#stats .count-total {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+#stats .count-completed {
+    color: #22c55e;
+    font-weight: 700;
+}
+
+#stats .count-active {
+    color: #f59e0b;
+    font-weight: 700;
 }
 /* ----------------- */
