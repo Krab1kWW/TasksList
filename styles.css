@@ -346,3 +346,66 @@ body {
     height: 24px;
 }
 /* ----------------- */
+
+
+
+
+
+/* ===== Контейнер фильтров ===== */
+#filters {
+    display: flex;
+    gap: 4px;
+    background: #f1f5f9;
+    padding: 6px;
+    border-radius: 12px;
+    margin: 16px 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* ===== Каждая кнопка-вкладка ===== */
+#filters button {
+    flex: 1;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* ===== Ховер (наведение) ===== */
+#filters button:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: #1e293b;
+}
+
+/* ===== Активная вкладка ===== */
+#filters button.active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-weight: 700;
+}
+
+/* ===== Счётчики рядом с названием (если добавишь позже) ===== */
+#filters button .count {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 0 8px;
+    border-radius: 12px;
+    background: #e2e8f0;
+    color: #475569;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+#filters button.active .count {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+/* ----------------- */

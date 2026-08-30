@@ -79,7 +79,7 @@ function renderTasks()
             li.className = 'task-item';
             li.innerHTML = `
             <input type="checkbox" class="task-checkbox" data-id="${filteredTasks[i].id}" ${filteredTasks[i].completed ? 'checked' : ''}>
-            <span class="task-text ${filteredTasks[i].completed ? 'completed' : ''}">${filteredTasks[i].text}</span>
+            <span class="task-text ${filteredTasks[i].completed ? 'completed' : ''}" data-id="${filteredTasks[i].id}">${filteredTasks[i].text}</span>
             <button class="btn-delete" data-id="${filteredTasks[i].id}">Удалить</button>
              `;
             taskList.appendChild(li);
@@ -201,6 +201,63 @@ taskList.addEventListener('click', function(e){
         
     }
 });
+
+
+taskList.addEventListener('dblclick', function(e)
+{  
+
+    if (e.target.matches('.task-text')) {
+        let id = Number(e.target.dataset.id);
+
+        for (let i = 0; i < tasks.length; i++)
+        {
+            if (tasks[i].id === id)
+            {
+                const task = tasks[i];
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.value = task.text;
+                e.target.replaceWith(input);
+
+                input.focus();
+                input.select();
+
+                
+                function save() {
+                    const newText = input.value.trim();
+                    if (newText === '')
+                    {
+                        showNotification("Текст не может быть пустым!", "error");
+                    }
+                    else
+                    {
+                        task.text = newText;
+                        showNotification("Задача обновлена!", "success");
+                    }
+                    
+                    renderTasks();
+                }
+
+                input.addEventListener('blur', save);
+
+      
+                input.addEventListener('keypress', function(event) {
+                    if (event.key === 'Enter') {
+                        input.blur(); 
+                    }
+                });
+
+                break; 
+            }
+        }
+    }
+});
+
+
+
+
+
+
 
 //Добавление задачи
 addButton.addEventListener('click', addTask);
